@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Vector;
 import java.util.Stack;
 
 public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
@@ -11,8 +10,9 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
     public AdjacencyMatrixGraph(int n)
     {
         edges = new boolean[n][n];
-        //TODO: SuppressWarning insertion
-        vertices = (Vertex<E>[]) new Vertex[n];
+        @SuppressWarnings("unchecked")
+        Vertex<E>[] v = (Vertex<E>[]) new Vertex[n];
+        vertices = v;
         
         for (int i = 0; i < vertices.length; i++) 
         {
@@ -137,6 +137,21 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
         return traversalOrder;
     }
 
+    private boolean hasUnvisitedNeighbor(Vertex<E> vertex)
+    {
+        return nextUnvisitedNeighbor(vertex) != null;
+    }
+
+    private Vertex<E> nextUnvisitedNeighbor(Vertex<E> vertex)
+    {
+        for (int i = 0; i < vertices.length; i++)
+        {
+            if (edges[vertex.getIndex()][i] && !vertices[i].isVisited())
+                return vertices[i];
+        }
+        return null;
+    }
+
     public Queue<E> depthFirstTraverse(E originLabel)
     {
         resetVerticesVisitedState();
@@ -150,11 +165,11 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
         while(!vertexStack.isEmpty())
         {
             Vertex<E> topVertex = vertexStack.peek();
-            //TODO: ASK ABA
-            if(neighbor != null && !neighbor.isVisited())
+            if(hasUnvisitedNeighbor(topVertex))
             {
+                Vertex<E> neighbor = nextUnvisitedNeighbor(topVertex);
                 neighbor.visit();
-                traversalOrder.add(neighbor.getLabel());
+                traversalOrder.add(neighbor.getValue());
                 vertexStack.push(neighbor);
             }
             else
