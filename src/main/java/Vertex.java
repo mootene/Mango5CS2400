@@ -9,6 +9,12 @@ public class Vertex<T>
             this.index = index;
         }
 
+        Vertex(T value, int index)
+        {
+            this(index);
+            this.value = value;
+        }
+
         public int getIndex()
         {
             return index;
