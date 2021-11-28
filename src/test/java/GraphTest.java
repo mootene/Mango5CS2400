@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class GraphTest
 {
     private void printBreadthFirst(Graph<T> graph)
@@ -14,8 +16,17 @@ public class GraphTest
     
     public static void main(String[] args)
     {
-        char [] V = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
-        boolean [][] E = {{false, true, false, true, true, false, false, false, false},
+        Vertex<Character> A = new Vertex<>('A', 0);
+        Vertex<Character> B = new Vertex<>('B', 1);
+        Vertex<Character> C = new Vertex<>('C', 2);
+        Vertex<Character> D = new Vertex<>('D', 3);
+        Vertex<Character> E = new Vertex<>('E', 4);
+        Vertex<Character> F = new Vertex<>('F', 5);
+        Vertex<Character> G = new Vertex<>('G', 6);
+        Vertex<Character> H = new Vertex<>('H', 7);
+        Vertex<Character> I = new Vertex<>('I', 8);
+        Vertex[] vertices = {A, B, C, D, E, F, G, H, I};
+        boolean [][] adjacencyMatrix = {{false, true, false, true, true, false, false, false, false},
                         {false, false, false, false, true, false, false, false, false},
                         {false, true, false, false, false, false, false, false, false},
                         {false, false, false, false, false, false, true, false, false}, 
@@ -25,9 +36,47 @@ public class GraphTest
                         {false, false, false, false, false, false, false, false, true},
                         {false, false, false, false, false, true, false, false, false}};
 
-        AdjacencyMatrixGraph <char> matrixGraph = new AdjacencyMatrixGraph<>(V, E);
-        System.out.println("Traversal under Adjacency Matrix Graph Implementation:")
+        LinkedList<Vertex> a = new LinkedList<>();
+        A.add(B);
+        A.add(D);
+        A.add(E);
+
+        LinkedList<Character> b = new LinkedList<>();
+        B.add(E);
+        
+        LinkedList<Character> c = new LinkedList<>();
+        C.add(B);
+
+        LinkedList<Character> d = new LinkedList<>();
+        D.add(G);
+
+        LinkedList<Character> e = new LinkedList<>();
+        E.add(F);
+        E.add(H);
+
+        LinkedList<Character> f = new LinkedList<>();
+        E.add(C);
+        E.add(H);
+
+        LinkedList<Character> g = new LinkedList<>();
+        E.add(H);
+
+        LinkedList<Character> h = new LinkedList<>();
+        E.add(I);
+
+        LinkedList<Character> i = new LinkedList<>();
+        E.add(F);
+
+        LinkedList[] adjacencyList = {a, b, c, d, e, f, g, h, i};
+
+        AdjacencyMatrixGraph <Character> matrixGraph = new AdjacencyMatrixGraph<>(vertices, adjacencyMatrix);
+        AdjacencyListGraph <Character> listGraph = new AdjacencyListGraph<>(vertices, adjacencyList);
+        System.out.println("Traversal under Adjacency Matrix Graph Implementation:");
         printBreadthFirst(matrixGraph);
         printDepthFirst(matrixGraph);
+
+        System.out.println("Traversal under Adjacency List Graph Implementation:");
+        printBreadthFirst(listGraph);
+        printDepthFirst(listGraph);
     }
 }
