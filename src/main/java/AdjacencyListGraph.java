@@ -38,8 +38,8 @@ public class AdjacencyListGraph <E> implements GraphInterface
     }
     public void addEdge(int source, int target)
     {
-        list[source].addFirst(target);
-        list[target].addFirst(source); 
+        list[source].add(target);
+        list[target].add(source); 
     }
     public E getLabel(int vertex)
     {
