@@ -11,6 +11,7 @@ public class AdjacencyListGraph <E> implements GraphInterface
    
     public AdjacencyListGraph(int n)
     {
+        this.n = n;
         list = new LinkedList[n];
         for(int i = 0; i<n; i++)
         {
