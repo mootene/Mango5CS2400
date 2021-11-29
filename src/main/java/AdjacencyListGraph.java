@@ -34,7 +34,7 @@ public class AdjacencyListGraph <E> implements GraphInterface
     
     public boolean isEdge(int source, int target)
     {
-        return (edges[source][target]);
+        return list[source].contains(target);
     }
     public void addEdge(int source, int target)
     {
