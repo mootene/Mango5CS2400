@@ -7,14 +7,16 @@ public class AdjacencyListGraph <E> implements GraphInterface
 {
     private boolean[][] edges;
     Vertex<E>[] vertices;
-    LinkedList<LinkedList> list;
+    LinkedList<LinkedList> list[];
+    int v;
 
-    public AdjacencyListGraph(int n)
+    public AdjacencyListGraph(int v)
     {
-        list = new LinkedList<>();
-        for(int i = 0; i<n; i++)
+        this.v = v;
+        list = new LinkedList[v];
+        for(int i = 0; i<v; i++)
         {
-            list.add(new LinkedList<>());
+            list[i] = new LinkedList<>();
         }
     }
 
@@ -36,8 +38,8 @@ public class AdjacencyListGraph <E> implements GraphInterface
     }
     public void addEdge(int source, int target)
     {
-        list.get(source).add(target);
-        list.get(target).add(source); 
+        list[source].addFirst(target);
+        list[target].addFirst(source); 
     }
     public E getLabel(int vertex)
     {
