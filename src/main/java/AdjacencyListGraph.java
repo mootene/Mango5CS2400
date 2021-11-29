@@ -8,13 +8,11 @@ public class AdjacencyListGraph <E> implements GraphInterface
     private boolean[][] edges;
     Vertex<E>[] vertices;
     LinkedList<LinkedList> list[];
-    int v;
-
-    public AdjacencyListGraph(int v)
+   
+    public AdjacencyListGraph(int n)
     {
-        this.v = v;
-        list = new LinkedList[v];
-        for(int i = 0; i<v; i++)
+        list = new LinkedList[n];
+        for(int i = 0; i<n; i++)
         {
             list[i] = new LinkedList<>();
         }
