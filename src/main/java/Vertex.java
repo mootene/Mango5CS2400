@@ -6,7 +6,7 @@ public class Vertex<T>
         private boolean visited = false;
         private T value;
         private int index;
-        private LinkedList<Vertex<T>> list; 
+        private LinkedList<Vertex<T>> list = new LinkedList<>(); 
 
         Vertex(int index)
         {

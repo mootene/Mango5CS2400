@@ -17,15 +17,6 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
             vertices[i] = new Vertex<E>(i);
         }
     }
-
-    public AdjacencyListGraph(Vertex<E>[] vertices)
-    {
-        this(vertices.length);
-        for (int i = 0; i < vertices.length; i++)
-        {
-            this.vertices[i] = vertices[i];
-        }
-    }
     
     public AdjacencyListGraph(E[] labels)
     {

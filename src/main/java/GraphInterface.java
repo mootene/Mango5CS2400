@@ -1,3 +1,5 @@
+import java.util.Queue;
+
 public interface GraphInterface<E>
 {
     public boolean isEdge(int source, int target);
@@ -7,4 +9,6 @@ public interface GraphInterface<E>
     public int size();
     public boolean removeEdge(int source, int target);
     public void setLabel(int vertex, E newLabel);
+    public Queue<E> depthFirstTraverse(E originLabel);
+    public Queue<E> breadthFirstTraverse(E originLabel);
 }
