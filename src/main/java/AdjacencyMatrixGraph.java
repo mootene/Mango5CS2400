@@ -36,7 +36,9 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
         {
             for (int j = 0; j < labels.length; j++)
             {
-                this.edges[i][j] = edges[i][j];
+                if (edges[i][j])
+                    addEdge(i, j);
+                // this.edges[i][j] = edges[i][j];
             }
         }
     }
