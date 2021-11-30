@@ -37,9 +37,20 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
             for (int j = 0; j < labels.length; j++)
             {
                 if (edges[i][j])
-                    addEdge(i, j);
-                // this.edges[i][j] = edges[i][j];
+                    addEdge(i, j); // this.edges[i][j] = edges[i][j];
             }
+        }
+    }
+
+    public AdjacencyMatrixGraph(E[] labels, E[][] edges)
+    {
+        this(labels);
+        for (int i = 0; i < edges.length; i++)
+        {
+            E[] pair = edges[i];
+            int source = findVertexWithValue(pair[0]).getIndex();
+            int target = findVertexWithValue(pair[1]).getIndex();
+            addEdge(source, target);
         }
     }
 
@@ -83,12 +94,16 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
 
     public boolean removeEdge(int source, int target)
     {
-        boolean edge = edges[source][target];
+        boolean wasEdge = edges[source][target];
         edges[source][target] = false;
-        return edge; 
+        return wasEdge; 
     }
 
+
     @Override
+    /**
+     * 
+     */
     public void setLabel(int vertex, E newLabel) 
     {
         vertices[vertex].setValue(newLabel);
@@ -112,6 +127,11 @@ public class AdjacencyMatrixGraph<E> implements GraphInterface<E>
         return null;
     }
 
+    /**
+     * performs breadth-first traversal on this graph. 
+     * @param originLabel label of origin/starting point vertex
+     * @return queue contianing order of vertices traversed
+     */
     public Queue<E> breadthFirstTraverse(E originLabel)
     {
         resetVerticesVisitedState();
