@@ -1,11 +1,12 @@
 import java.util.LinkedList;
+import java.util.List;
 
 public class Vertex<T> 
     {
         private boolean visited = false;
         private T value;
         private int index;
-        private LinkedList<Vertex> list; 
+        private LinkedList<Vertex<T>> list; 
 
         Vertex(int index)
         {
@@ -18,12 +19,12 @@ public class Vertex<T>
             this.value = value;
         }
 
-        public LinkedList<Vertex> getList()
+        public List<Vertex<T>> getList()
         {
             return list;
         }
 
-        public void setList(LinkedList<Vertex> list)
+        public void setList(LinkedList<Vertex<T>> list)
         {
             while(!list.isEmpty())
             {
@@ -31,10 +32,15 @@ public class Vertex<T>
             }
         }
         
-        public void addToList(Vertex target)
+        public void addToList(Vertex<T> target)
         {
             if (!list.contains(target))
                 list.add(target);
+        }
+
+        public boolean removeFromList(Vertex<T> target)
+        {
+            return list.remove(target);
         }
 
         public int getIndex()

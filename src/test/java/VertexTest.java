@@ -26,7 +26,10 @@ public class VertexTest
     @Test
     void testgetIndex()
     {
-        
+        Vertex <Integer> v = new Vertex<Integer>(76, 0);
+        Vertex <Integer> vx = new Vertex<Integer>(84, 5);
+        assertFalse(v.getIndex() == vx.getIndex());
+        assertEquals(0, v.getIndex());
     }
 
     @Test
