@@ -1,8 +1,11 @@
+import java.util.LinkedList;
+
 public class Vertex<T> 
     {
         private boolean visited = false;
         private T value;
         private int index;
+        private LinkedList<Vertex> list; 
 
         Vertex(int index)
         {
@@ -13,6 +16,25 @@ public class Vertex<T>
         {
             this(index);
             this.value = value;
+        }
+
+        public LinkedList<Vertex> getList()
+        {
+            return list;
+        }
+
+        public void setList(LinkedList<Vertex> list)
+        {
+            while(!list.isEmpty())
+            {
+                this.list.add(list.pop());
+            }
+        }
+        
+        public void addToList(Vertex target)
+        {
+            if (!list.contains(target))
+                list.add(target);
         }
 
         public int getIndex()
