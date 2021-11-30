@@ -1,35 +1,53 @@
 import java.util.LinkedList;
-import java.beans.Transient;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import org.junit.jupiter.api.Test;
+import java.lang.reflect.InvocationTargetException;
 
 public class GraphTest
 {
-    @Test
+    @ParameterizedTest
+    @ValueSource(classes = {
+            AdjacencyListGraph.class,
+            AdjacencyMatrixGraph.class})
     void testIsEdge()
     {
+        int[] labels = {1, 2, 3, 17};
+        int[][] edges = {{1, 2}, {1, 3}, {2, 17}};
+        GraphInterface<Integer> graph = new GraphInterface<>(labels, edges);
+        assertTrue(graph.isEdge(0,1));
+        assertFalse(17, graph.getLabel(3, 1));
 
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(classes = {
+            AdjacencyListGraph.class,
+            AdjacencyMatrixGraph.class})
     void testAddEdge()
     {
-
+        int[] labels = {1, 2, 3, 17};
+        int[][] edges = {{1, 2}, {1, 3}, {2, 17}};
+        GraphInterface<Integer> graph = new GraphInterface<>(labels, edges);        assertFalse(graph.isEdge(0, 1));
+        graph.addEdge(0, 1);
+        assertTrue(graph.isEdge(0, 1));
+        
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(classes = {
+            AdjacencyListGraph.class,
+            AdjacencyMatrixGraph.class})
     void testGetLabel()
     {
-
+        int[] labels = {1, 2, 3, 17};
+        GraphInterface<Integer> graph = new GraphInterface<>(labels);
+        assertEquals(1, graph.getLabel(0));
+        assertEquals(17, graph.getLabel(3));
     }
 
     @Test
@@ -38,16 +56,25 @@ public class GraphTest
 
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(classes = {
+            AdjacencyListGraph.class,
+            AdjacencyMatrixGraph.class})
     void testSize()
     {
-
+        int[] labels = {1, 2, 3, 17};
+        Graph<Integer> graph = new Graph<>(labels);
+        assertEquals(4, graph.size());
     }
 
     @Test
     void testRemoveEdge()
     {
-
+        int[] labels = {1, 2, 3, 17};
+        int[][] edges = {{1, 2}, {1, 3}, {2, 17}};
+        GraphInterface<Integer> graph = new GraphInterface<>(labels, edges);        assertFalse(graph.isEdge(0, 1));
+        graph.removeEdge(0, 1);
+        assertFalse(graph.isEdge(0, 1));
     }
 
     @Test
@@ -67,7 +94,7 @@ public class GraphTest
     {
 
     }
-    
+
     private void printBreadthFirst(Graph<T> graph)
     {
         T[] traversalArray = graph.breadthFirstTraverse().toArray();
@@ -93,41 +120,12 @@ public class GraphTest
                         {false, false, false, false, false, false, false, false, true},
                         {false, false, false, false, false, true, false, false, false}};
 
-        LinkedList<Vertex> a = new LinkedList<>();
-        A.add('B');
-        A.add('D');
-        A.add('E');
+        Character[][] edges = {{'A', 'B'}, {'A', 'D'}, {'A', 'E'}, {'B', 'E'}, 
+                        {'D', 'G'}, {'E', 'F'}, {'E', 'F'}, {'E', 'H'}, {'G', 'H'}, 
+                        {'F', 'C'}, {'F', 'H'}, {'H', 'I'}, {'C', 'B'}, {'I', 'F'}};
 
-        LinkedList<Character> b = new LinkedList<>();
-        B.add('E');
-        
-        LinkedList<Character> c = new LinkedList<>();
-        C.add('B');
-
-        LinkedList<Character> d = new LinkedList<>();
-        D.add('G');
-
-        LinkedList<Character> e = new LinkedList<>();
-        E.add('F');
-        E.add('H');
-
-        LinkedList<Character> f = new LinkedList<>();
-        E.add('C');
-        E.add('H');
-
-        LinkedList<Character> g = new LinkedList<>();
-        E.add('H');
-
-        LinkedList<Character> h = new LinkedList<>();
-        E.add('I');
-
-        LinkedList<Character> i = new LinkedList<>();
-        E.add('F');
-
-        LinkedList[] adjacencyList = {a, b, c, d, e, f, g, h, i};
-
-        AdjacencyMatrixGraph <Character> matrixGraph = new AdjacencyMatrixGraph<>(vertexLabels, adjacencyMatrix);
-        AdjacencyListGraph <Character> listGraph = new AdjacencyListGraph<>(vertexLabels, adjacencyList);
+        AdjacencyMatrixGraph <Character> matrixGraph = new AdjacencyMatrixGraph<>(vertexLabels, edges);
+        AdjacencyListGraph <Character> listGraph = new AdjacencyListGraph<>(vertexLabels, edges);
         System.out.println("Traversal under Adjacency Matrix Graph Implementation:");
         printBreadthFirst(matrixGraph);
         printDepthFirst(matrixGraph);
