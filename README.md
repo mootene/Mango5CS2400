@@ -16,4 +16,4 @@ main method located in src/test/java/GraphTest.java and will output traversals o
 to run unit tests/ check for buid failures utilize "mvn test" and "mvn compile" on command line.
 (All files can be seen passing tests and build success shown in screen recording) \
 
-Link to Demonstration Video: \
+Link to Demonstration Video: https://livecsupomona-my.sharepoint.com/:v:/g/personal/jaustarz_cpp_edu/EY6UYrqmFvlDrwXuFLJTwJIB3pVuGvFB-2Ju6rVYWvXEjQ?e=ljiUO2\
