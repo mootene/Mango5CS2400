@@ -5,8 +5,12 @@ import java.util.Stack;
 
 public class AdjacencyListGraph <E> implements GraphInterface<E>
 {
-    Vertex<E>[] vertices;
+    private Vertex<E>[] vertices;
    
+    /**
+     * constructor to delare vertices[] given size
+     * @param n given size of vertices[]
+     */
     public AdjacencyListGraph(int n)
     {
         @SuppressWarnings("unchecked")
@@ -18,6 +22,11 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
         }
     }
     
+    /**
+     * calls constructor this(int) and initiates 
+     * vertices with given labels array
+     * @param labels array of labels for vertices
+     */
     public AdjacencyListGraph(E[] labels)
     {
         this(labels.length);
@@ -27,6 +36,11 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
         }
     }
 
+    /**
+     * constructs edges and labels given 
+     * @param labels labels array to be copied into this labels
+     * @param edges boolean edges array to be copied into this edges
+     */
     public AdjacencyListGraph(E[] labels, E[][] edges)
     {
         this(labels);
@@ -38,21 +52,41 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
         }
     }
 
+    /**
+     * checks if an edge exists from source to target
+     * * @param source source vertex index of edge 
+     * @param target target vertex index of edge 
+     */
     public boolean isEdge(int source, int target)
     {
         return vertices[source].getList().contains(vertices[target]);
     }
 
+     /**
+     * changes edges[source][target] to true, therefore creating a direct edge from source to target
+     * @param source source vertex index of edge 
+     * @param target target vertex index of edge 
+     */
     public void addEdge(int source, int target)
     {
         vertices[source].addToList(vertices[target]);
     }
 
+     /**
+     * retrieves label at given vertex index in array vertices
+     * @param vertex index of given vertex
+     * @return label of given vertex
+     */
     public E getLabel(int vertex)
     {
         return vertices[vertex].getValue();
     }
 
+    /**
+     * finds all neighbors of vertex at given index in vertices array
+     * @param vertex given vertex index
+     * @return array of neighbor indices
+     */
     public int[] neighbors(int vertex)
     {
         List<Vertex<E>> list = vertices[vertex].getList();
@@ -66,17 +100,32 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
         return neighborIndeces;
     }
 
+    /**
+     * retrieves size of this graph
+     * @return size of this graph
+     */
     public int size()
     {
         return vertices.length;
     }
 
+    /**
+     * removes edge between given source index and given target index
+     * @param source index of source vertex in vertices array
+     * @param target index of target vertex in vertices array
+     * @return true if edge existed before removal, false if was never an edge
+     */
     public boolean removeEdge(int source, int target)
     {
         return vertices[source].removeFromList(vertices[target]);
     }
 
     @Override
+    /**
+     * changes label of given vertex to provided value
+     * @param vertex index of given vertex in vertices array
+     * @param newLabel desired new label for given vertex
+     */
     public void setLabel(int vertex, E newLabel)
     {
         vertices[vertex].setValue(newLabel);
@@ -100,6 +149,11 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
         return null;
     }
 
+     /**
+     * performs breadth-first traversal on this graph. 
+     * @param originLabel label of origin/starting point vertex
+     * @return queue contianing order of vertices traversed
+     */
     public Queue<E> breadthFirstTraverse(E originLabel)
     {
         resetVerticesVisitedState();
@@ -142,6 +196,11 @@ public class AdjacencyListGraph <E> implements GraphInterface<E>
         return null;
     }
 
+    /**
+     * performs depth first traversal of this graph from given origin vertex
+     * @param originLabel label of given origin
+     * @return queue of traversal order
+     */
     public Queue<E> depthFirstTraverse(E originLabel)
     {
         resetVerticesVisitedState();
