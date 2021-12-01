@@ -304,7 +304,7 @@ public class GraphTest
         System.out.println("Breadth-First Traversal: " + test.project5MatrixBreadthFirst());
         System.out.println("Depth-First Traversal  : " + test.project5MatrixDepthFirst());
 
-        System.out.println("\nTraversal under Adjacency Matrix Graph Implementation:");
+        System.out.println("\nTraversal under Adjacency List Graph Implementation:");
         System.out.println("Breadth-First Traversal: " + test.project5ListBreadthFirst());
         System.out.println("Depth-First Traversal  : " + test.project5ListDepthFirst());
     
